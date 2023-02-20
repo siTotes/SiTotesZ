@@ -1050,7 +1050,9 @@ function celek() {
                 { 'IsOnline': 'on' } // object with updates
             ).then(function(data) {
                 console.log(data);
-            }
+            }, function(err){
+                console.log(err);
+            });
         }
     }
 
