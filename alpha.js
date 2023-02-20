@@ -19,9 +19,9 @@ const cekonlen = setInterval(() => {
             'infobot', // column name
             'status', // value to search for
             { 'IsOnline': 'on' } // object with updates
-        ).then(function(data) {
+        ).then(function(data) 
             //console.log(data);
-        }
+        
 }, 5000);
 
 const {
