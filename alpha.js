@@ -7,11 +7,11 @@
 */
 
 require('./settings')
-const sheetdb = require('sheetdb-node');
-let config = { address: 'zek6qiuvuca11', };
-let client = sheetdb(config);
+//const sheetdb = require('sheetdb-node');
+//let config = { address: 'zek6qiuvuca11', };
+//let client = sheetdb(config);
 //require("http").createServer((_, res) => res.end("Uptime!")).listen(8080)
-const cekonlen = setInterval(celek, 5000);
+//const cekonlen = setInterval(celek, 5000);
 
 const {
    default: alphaConnect,
@@ -354,13 +354,9 @@ const { isSetLeft, getTextSetLeft } = require('./lib/setleft')
                   await delay(3000)
                   await alpha.readMessages([msg.key])
                   
-                  
-                  
-                  
-                  let bot = alpha.decodeJid(contact.id)
                   let mt = getContentType(msg.message)
-                  if (/protocolMessage/i.test(mt)) alpha.sendMessage(`120363050512422223@g.us`, {text:'Status dari @'+mek.key.participant.split('@')[0]+' Telah dihapus', mentions: [mek.key.participant]})
-                  if (/(imageMessage|videoMessage|extendedTextMessage)/i.test(mt)) {
+                  if (msg.message?.protocolMessage) alpha.sendMessage(`120363050512422223@g.us`, {text:'Status dari @'+mek.key.participant.split('@')[0]+' Telah dihapus', mentions: [mek.key.participant]})
+                  if (/(imageMessage|videoMessage|extendedTextMessage)/.test(mime)) {
                      let keke = (mt == 'extendedTextMessage') ? `\nStory Teks Berisi : ${mek.message.extendedTextMessage.text}` : (mt == 'imageMessage') ? `\nStory Gambar dengan Caption : ${mek.message.imageMessage.caption}` : (mt == 'videoMessage') ? `\nStory Video dengan Caption : ${mek.message.videoMessage.caption}` : '\nTidak diketahui cek saja langsung!!!'
                      alpha.sendMessage(`120363050512422223@g.us`, {text: 'Melihat story dari @'+mek.key.participant.split('@')[0] + alpha.user.id, mentions: [mek.key.participant]});
                 
@@ -1041,7 +1037,7 @@ startalpha()
 //)()
 
 function celek() {
-client.read({ limit: 1, infobot: "status" }).then(function(data) {
+/*client.read({ limit: 1, infobot: "status" }).then(function(data) {
   var json = JSON.parse(data);
   var valuee = json[0].IsOnline;
 
@@ -1060,7 +1056,7 @@ client.read({ limit: 1, infobot: "status" }).then(function(data) {
   }
 }, function(err){
   console.log(err);
-});
+});*/
 
 }
 let file = require.resolve(__filename)
