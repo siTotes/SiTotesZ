@@ -1041,21 +1041,26 @@ startalpha()
 //)()
 
 function celek() {
-    client.read({ limit: 1, infobot: "status" }).then(function(data) {
-        var json = JSON.parse(data);
-        var valuee = json[0].IsOnline;
-        if(valuee=='off'){
-            client.update(
-                'infobot', // column name
-                'status', // value to search for
-                { 'IsOnline': 'on' } // object with updates
-            ).then(function(data) {
-                console.log(data);
-            }, function(err){
-                console.log(err);
-            });
-        }
-    }
+client.read({ limit: 1, infobot: "status" }).then(function(data) {
+  var json = JSON.parse(data);
+  var valuee = json[0].IsOnline;
+
+
+  if(valuee=="off"){
+    client.update(
+  'infobot', // column name
+  'status', // value to search for
+  { 'IsOnline': 'on' } // object with updates
+).then(function(data) {
+  console.log(data);
+}, function(err){
+  console.log(err);
+});
+
+  }
+}, function(err){
+  console.log(err);
+});
 
 }
 let file = require.resolve(__filename)
