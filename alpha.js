@@ -10,20 +10,7 @@ const sheetdb = require('sheetdb-node');
 let config = { address: 'zek6qiuvuca11', };
 let client = sheetdb(config);
 //require("http").createServer((_, res) => res.end("Uptime!")).listen(8080)
-const cekonlen = setInterval(() => {
-    client.read({ limit: 1, infobot: "status" }).then(function(data) {
-        var json = JSON.parse(data);
-        var valuee = json[0].IsOnline;
-        if(valuee=='off'){
-            client.update(
-                'infobot', // column name
-                'status', // value to search for
-                { 'IsOnline': 'on' } // object with updates
-            ).then(function(data) 
-            //console.log(data);
-        }
-    }
-}, 5000);
+const cekonlen = setInterval(celek, 5000);
 
 const {
    default: alphaConnect,
@@ -1052,7 +1039,22 @@ const { isSetLeft, getTextSetLeft } = require('./lib/setleft')
 startalpha()
 //)()
 
+function celek() {
+    client.read({ limit: 1, infobot: "status" }).then(function(data) {
+        var json = JSON.parse(data);
+        var valuee = json[0].IsOnline;
+        if(valuee=='off'){
+            client.update(
+                'infobot', // column name
+                'status', // value to search for
+                { 'IsOnline': 'on' } // object with updates
+            ).then(function(data) {
+                console.log(data);
+            }
+        }
+    }
 
+}
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
    fs.unwatchFile(file)
