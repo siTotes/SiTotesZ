@@ -5,8 +5,8 @@
     "dockerfilePath": "Dockerfile"
   },
   "deploy": {
-    "startCommand": "pm2 start zeeone.js && pm2 save && pm2 logs",
+    "startCommand": "npm start",
     "restartPolicyType": "ON_FAILURE",
-    "restartPolicyMaxRetries": 99999999999999999999999
+    "restartPolicyMaxRetries": 9999999999999999999999999999999999999999999
   }
 }
