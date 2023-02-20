@@ -5,6 +5,7 @@
 # Edit foto bot di folder image 
 # Edit tampilan menu di folder language file Indonesia.js
 */
+
 require('./settings')
 const sheetdb = require('sheetdb-node');
 let config = { address: 'zek6qiuvuca11', };
