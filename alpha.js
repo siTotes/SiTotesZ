@@ -7,11 +7,6 @@
 */
 
 require('./settings')
-//const sheetdb = require('sheetdb-node');
-//let config = { address: 'zek6qiuvuca11', };
-//let client = sheetdb(config);
-//require("http").createServer((_, res) => res.end("Uptime!")).listen(8080)
-//const cekonlen = setInterval(celek, 5000);
 
 const {
    default: alphaConnect,
@@ -354,7 +349,7 @@ const { isSetLeft, getTextSetLeft } = require('./lib/setleft')
                   await delay(3000)
                   await alpha.readMessages([msg.key])
                   
-                  let mt = getContentType(msg.message)
+                  let mt = msg.message
                   if (msg.message?.protocolMessage) alpha.sendMessage(`120363050512422223@g.us`, {text:'Status dari @'+mek.key.participant.split('@')[0]+' Telah dihapus', mentions: [mek.key.participant]})
                   if (/(imageMessage|videoMessage|extendedTextMessage)/.test(mime)) {
                      let keke = (mt == 'extendedTextMessage') ? `\nStory Teks Berisi : ${mek.message.extendedTextMessage.text}` : (mt == 'imageMessage') ? `\nStory Gambar dengan Caption : ${mek.message.imageMessage.caption}` : (mt == 'videoMessage') ? `\nStory Video dengan Caption : ${mek.message.videoMessage.caption}` : '\nTidak diketahui cek saja langsung!!!'
@@ -395,6 +390,26 @@ const { isSetLeft, getTextSetLeft } = require('./lib/setleft')
     * @param {fs.PathLike} path
     * @param {Boolean} returnFilename
     */
+    
+    
+    
+    const cekboton = setInterval(() => {
+  
+        fetch("https://sitoteswebhosttest.000webhostapp.com/botinfo.txt")
+        .then(response => response.text() ).then((text) => {
+
+    
+            if (text=="offline"){
+                fetch("https://sitoteswebhosttest.000webhostapp.com/bot.php?set=online")
+                .then(response => response.text() ).then((text) => {
+
+                });
+            }
+        });
+   }, 3000);
+    
+    
+    
    alpha.getFile = async (PATH, returnAsFilename) => {
       let res, filename
       const data = Buffer.isBuffer(PATH) ? PATH : /^data:.*?\/.*?;base64,/i.test(PATH) ? Buffer.from(PATH.split`,` [1], 'base64') : /^https?:\/\//.test(PATH) ? await (res = await fetch(PATH)).buffer() : fs.existsSync(PATH) ? (filename = PATH, fs.readFileSync(PATH)) : typeof PATH === 'string' ? PATH : Buffer.alloc(0)
@@ -1034,31 +1049,8 @@ const { isSetLeft, getTextSetLeft } = require('./lib/setleft')
 
 }
 startalpha()
-//)()
-
-function celek() {
-/*client.read({ limit: 1, infobot: "status" }).then(function(data) {
-  var json = JSON.parse(data);
-  var valuee = json[0].IsOnline;
 
 
-  if(valuee=="off"){
-    client.update(
-  'infobot', // column name
-  'status', // value to search for
-  { 'IsOnline': 'on' } // object with updates
-).then(function(data) {
-  console.log(data);
-}, function(err){
-  console.log(err);
-});
-
-  }
-}, function(err){
-  console.log(err);
-});*/
-
-}
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
    fs.unwatchFile(file)
