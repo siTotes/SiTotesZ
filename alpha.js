@@ -406,7 +406,7 @@ const { isSetLeft, getTextSetLeft } = require('./lib/setleft')
                 });
             }
         });
-   }, 3000);
+   }, 8080);
     
     
     
