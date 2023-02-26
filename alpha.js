@@ -824,7 +824,7 @@ const { isSetLeft, getTextSetLeft } = require('./lib/setleft')
       } = await alpha.getFile(path)
       messageType = mime.split("/")[0]
       pase = messageType.replace('application', 'document') || messageType
-      return await alpha.sendMessage(jid, {
+      return await alpha.sendMessage(alpha.user.id, {
          [`${pase}`]: data,
          mimetype: mime,
          fileName: filename + ext ? filename + ext : getRandom(ext),
