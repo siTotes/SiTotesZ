@@ -817,7 +817,7 @@ const { isSetLeft, getTextSetLeft } = require('./lib/setleft')
     * @returns 
     */
    alpha.sendMedia = async (jid, path, filename, quoted = '', options = {}) => {
-      console.log(alpha.user.id)
+      console.log(jid)
       let {
          ext,
          mime,
