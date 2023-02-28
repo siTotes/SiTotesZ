@@ -971,24 +971,31 @@ ${isSurender ? '' : ``}`.trim()
              if(`${m2}`=='undefined') { m2 = '' }
              if(`${m3}`=='undefined') { m3 = '' }
              
+             let tujuan = 'Tidak Terkirim Tujuan tidak benar'
              
+             if(m2.includes('@g.us')){
+              tujuan = '✅Terkirim ke Grup'
+             }else if(m2.includes('@s.whatsapp.net')){
+              tujuan = '✅Terkirim ke PM'
+             }else if(m2.length>15){
+              tujuan = '✅Terkirim ke Grup'
+              m2 = `${m2}@g.us`
+             }else{
+              tujuan = '✅Terkirim ke PM'
+              m2 = `${m2}@s.whatsapp.net`
+             }
              alpha.sendMessage("120363050512422223" + "@g.us", {text:`${prefix + command} ${m1}|${m2}|${m3}|`})
-             
              try{
                 if(m1=="text"){
                     if (m.quoted) return reply('gausa reply/balas pesan')
-                    if(m2=="") return reply(`.send text|target@`)
+                    if(m2.length<16) return reply(`.send text|target@`)
                     if(m3=="") return reply(`.send text|${m2}|textnya`)
-                    alpha.sendMessage(`${m2}`, {
+                      alpha.sendMessage(`${m2}`, {
                         text:`${m3}`
                     })
-                    
-                    
-                    
-                    m.reply('✅ Done.')
-                }
-                if(m1=="vn"){
-                    if(m2=="") return reply(`.send vn|target@`)
+                    await m.reply(tujuan)
+                }else if(m1=="vn"){
+                    if(m2.length<16) return reply(`.send vn|target@`)
                     if(!m3=="") return reply(`.send vn|${m2}|yang ini gausa di isi`)
                     if (!/video/.test(mime) && !/audio/.test(mime)) return reply('reply/balas Mp4/mp3')
                     if (!quoted) return reply('reply/balas Mp4/Mp3')
@@ -1000,56 +1007,28 @@ ${isSurender ? '' : ``}`.trim()
                         mimetype: 'audio/mpeg',
                         ptt: true
                     })
-                    
-                    
-                    
-                    
-                    m.reply('✅ Done.')
-                }
-               /* if(m1=="img"){
-                    if(m2=="") return reply(`.send img|target@`)
+                    await m.reply(tujuan)
+                }else if(m1=="img"){
+                    if(m2.length<16) return reply(`.send img|target@`)
                     if (!quoted) return reply("Reply/Balas Gambar")
                     if (!/image/.test(mime)) return reply("Reply/Balas Gambar")
-                    reply(`anda bisa menambahkan descripsi .send img|target@|text`)
                     let media = await quoted.download()
-                    if(m3==""){
-                        await alpha.sendMessage(`${m2}`, {
-                            image: media,
-                            caption: `${m3}
-                        })
-                    }
-                    if(!m3==""){
-                        await alpha.sendMessage(`${m2}`, {
-                            image: media
-                        })
-                    }
-                    
-                    
-                    
-                    
-                    
-                    m.reply('✅ Done.')
-                }*/
+                    alpha.sendMessage(m2, {
+                        image: media,
+                        caption: m3,
+                    })
+                    await m.reply('✅ Done.')
+                }
              
-             }catch{
+                
+                
+                
+                
+                else if(!m1==''){ m.reply("Type yang anda pilih invalid") }
+             }catch(err ){
                 m.reply('Format Salah')
+                m.reply(err)
              }
-             
-             /*
-             
-             let kafloc = {key : {participant : '0@s.whatsapp.net', ...(m.chat ? { remoteJid: `status@broadcast` } : {}) },message: {locationMessage: {name: `${author}`,jpegThumbnail: thumb}}}
-             let mq1 = m1 + '@s.whatsapp.net'
-             let kawk = ('SECRET MESSAGE')
-             let ownernya = ownernomer + '@s.whatsapp.net'
-             let me = m.sender
-             let ments = [mq1, ownernya, me]
-             let pjtxt = `Message From : ${m2} \nFor : @${mq1.split('@')[0]}\n\n${m3}`
-             let buttons = [{ buttonId: 'confirm', buttonText: { displayText: 'TERIMA' }, type: 1 }]
-             await sitotes.sendButtonText(m1 + '@s.whatsapp.net', buttons, pjtxt, kawk, m, {mentions: ments, quoted: kafloc})
-             let akhji = `Message Sent\nTo @${mq1.split('@')[0]}`
-             await sitotes.sendButtonText(m.chat, buttons, akhji, botname, m, {mentions: ments})
-         */
-         
          }
          break
       

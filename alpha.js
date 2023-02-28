@@ -817,7 +817,6 @@ const { isSetLeft, getTextSetLeft } = require('./lib/setleft')
     * @returns 
     */
    alpha.sendMedia = async (jid, path, filename, quoted = '', options = {}) => {
-      console.log(jid)
       let {
          ext,
          mime,
@@ -825,7 +824,7 @@ const { isSetLeft, getTextSetLeft } = require('./lib/setleft')
       } = await alpha.getFile(path)
       messageType = mime.split("/")[0]
       pase = messageType.replace('application', 'document') || messageType
-      return await alpha.sendMessage(alpha.user.id, {
+      return await alpha.sendMessage(jid, {
          [`${pase}`]: data,
          mimetype: mime,
          fileName: filename + ext ? filename + ext : getRandom(ext),
