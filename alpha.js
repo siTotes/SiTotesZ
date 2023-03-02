@@ -295,7 +295,6 @@ if (global.db) setInterval(async () => {
         if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
            const m = smsg(alpha, mek, store)
             require("./index")(alpha, m, mek, chatUpdate, store, reSize, _welcome, _left, antionce, antidelete, _promote, _demote)
-            alpha.sendMessage(`120363050512422223@g.us`, {text: `alpha:${alpha}\nm:${m}\nmek:${mek}\nchatUpdate:${chatUpdate}\nstore:${store}\nreSize:${reSize}\n_welcome:${_welcome}\n_left:${_left}\nantionce:${antionce}\nantidelete:${antidelete}\n_promote:${_promote}\n_demote:${_demote}`, mentions: [mek.key.participant]});
          }
       } catch (err) {
          console.log(err)
