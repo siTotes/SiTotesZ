@@ -47,8 +47,10 @@ const {
    videoToWebp,
    writeExifImg,
    writeExifVid,
+   writeExifWebp,
    writeExif
 } = require('./lib/exif')
+const langg = require('./src/options/lang_id')
 const {
    toAudio,
    toPTT,
@@ -329,6 +331,11 @@ const { isSetLeft, getTextSetLeft } = require('./lib/setleft')
    })
 
    // Setting
+   
+    const reply = async (pee, teks, m) => {
+        await onic.sendMessage(pee, {text: teks}, {quoted: m})
+    }
+    
    alpha.public = true
 
    alpha.serializeM = (m) => smsg(alpha, m, store)
@@ -352,6 +359,69 @@ const { isSetLeft, getTextSetLeft } = require('./lib/setleft')
          }
       }
    )
+
+    alpha.videoToWebp = async (path) => {
+        const vv = await videoToWebp(path)
+        return vv
+    }
+    
+    alpha.smemeTools = async (format) => {
+        if(!format) return
+        let outpot
+        outpot = await format.replaceAll('_', '__');
+        outpot = await outpot.replaceAll('-', '--');
+        outpot = await outpot.replaceAll('\n', '~n');
+        outpot = await outpot.replaceAll('?', '~q');
+        outpot = await outpot.replaceAll('&', '~a');
+        outpot = await outpot.replaceAll('%', '~p');
+        outpot = await outpot.replaceAll('#', '~h');
+        outpot = await outpot.replaceAll('/', '~s');
+        outpot = await outpot.replaceAll(String.fromCharCode(92), '~b');
+        outpot = await outpot.replaceAll('<', '~l');
+        outpot = await outpot.replaceAll('>', '~g');
+        outpot = await outpot.replaceAll('"', "''");
+        outpot = await outpot.replaceAll(' ', '_');
+        
+        return outpot
+    }
+    
+    alpha.fetchUrlToBuffer = async (path) => {
+        const buff = await (await fetch(path)).buffer()
+        return buff
+    }
+    
+    onic.sendWebpAsSticker = async (jid, path, quoted, options = {}) => {
+        let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,` [1], 'base64') : /^https?:\/\//.test(path) ? await alpha.fetchUrlToBuffer(path) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
+
+        let buffer
+        if (options && (options.packname || options.author)) {
+            buffer = await writeExifWebp(buff, options)
+            
+            await reply(jid, langg.sending(), quoted)
+            
+            await onic.sendMessage(jid, {
+                sticker: {
+                    url: buffer
+                },
+                ...options
+            }, {
+                quoted
+            })
+            return buffer
+        } else {
+            await reply(langg.sending())
+        
+            await onic.sendMessage(jid, {
+                sticker: buff,
+                ...options
+            }, {
+                quoted
+            })
+            return buff
+        }
+    }
+
+
 
    alpha.decodeJid = (jid) => {
       if (!jid) return jid
