@@ -333,7 +333,7 @@ const { isSetLeft, getTextSetLeft } = require('./lib/setleft')
    // Setting
    
     const reply = async (pee, teks, m) => {
-        await onic.sendMessage(pee, {text: teks}, {quoted: m})
+        await alpha.sendMessage(pee, {text: teks}, {quoted: m})
     }
     
    alpha.public = true
@@ -390,7 +390,7 @@ const { isSetLeft, getTextSetLeft } = require('./lib/setleft')
         return buff
     }
     
-    onic.sendWebpAsSticker = async (jid, path, quoted, options = {}) => {
+    alpha.sendWebpAsSticker = async (jid, path, quoted, options = {}) => {
         let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,` [1], 'base64') : /^https?:\/\//.test(path) ? await alpha.fetchUrlToBuffer(path) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
 
         let buffer
@@ -399,7 +399,7 @@ const { isSetLeft, getTextSetLeft } = require('./lib/setleft')
             
             await reply(jid, langg.sending(), quoted)
             
-            await onic.sendMessage(jid, {
+            await alpha.sendMessage(jid, {
                 sticker: {
                     url: buffer
                 },
@@ -411,7 +411,7 @@ const { isSetLeft, getTextSetLeft } = require('./lib/setleft')
         } else {
             await reply(langg.sending())
         
-            await onic.sendMessage(jid, {
+            await alpha.sendMessage(jid, {
                 sticker: buff,
                 ...options
             }, {
