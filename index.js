@@ -287,6 +287,7 @@ module.exports = alpha = async (alpha, m, chatUpdate, mek, store, reSize, _welco
       const quoted = m.quoted ? m.quoted : m
       const mime = (quoted.msg || quoted).mimetype || ''
       const isMedia = /image|video|sticker|audio/.test(mime)
+      const pathbufc = `./src/session/Cache-Buffer/${m.chat}`
 
       // Group
       const groupMetadata = m.isGroup ? await alpha.groupMetadata(m.chat) : ''
